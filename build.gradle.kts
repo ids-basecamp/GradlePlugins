@@ -116,9 +116,6 @@ allprojects {
     afterEvaluate {
         // values needed for publishing
         val pluginsWebsiteUrl: String by project
-        val pluginsDeveloperId: String by project
-        val pluginsDeveloperName: String by project
-        val pluginsDeveloperEmail: String by project
         val pluginsScmConnection: String by project
         val pluginsScmUrl: String by project
         publishing {
@@ -136,9 +133,29 @@ allprojects {
                         }
                         developers {
                             developer {
-                                id.set(pluginsDeveloperId)
-                                name.set(pluginsDeveloperName)
-                                email.set(pluginsDeveloperEmail)
+                                id.set("dhommen")
+                                name.set("Daniel Hommen")
+                                email.set("dhommen@orbiter.de")
+                            }
+                            developer {
+                                id.set("schoenenberg")
+                                name.set("Maximilian Schönenberg")
+                                email.set("ms@emprium.at")
+                            }
+                            developer {
+                                id.set("paulocabrita-ionos")
+                                name.set("Paulo Cabrita")
+                                email.set("paulo.cabrita@ionos.com")
+                            }
+                            developer {
+                                id.set("jannotti-glaucio")
+                                name.set("Glaucio Jannotti")
+                                email.set("glaucio.jannotti@dengun.com")
+                            }
+                            developer {
+                                id.set("augustocmleal")
+                                name.set("Augusto Leal")
+                                email.set("augusto.leal.ext@dengun.com")
                             }
                         }
                         scm {
@@ -147,7 +164,6 @@ allprojects {
                         }
                     }
                 }
-//                println("\nset POM for: ${mp.groupId}:${mp.artifactId}:${mp.version}")
             }
         }
     }

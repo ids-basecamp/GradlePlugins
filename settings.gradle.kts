@@ -1,4 +1,4 @@
-rootProject.name = "GradlePlugins"
+rootProject.name = "gradle-plugins-fork"
 
 include(":plugins:autodoc:autodoc-plugin")
 include(":plugins:autodoc:autodoc-processor")
