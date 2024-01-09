@@ -22,15 +22,6 @@ public class Conventions {
         return new CheckstyleConvention();
     }
 
-
-    public static EdcConvention mavenPublishing() {
-        return new MavenPublishingConvention();
-    }
-
-    public static EdcConvention signing() {
-        return new SigningConvention();
-    }
-
     public static EdcConvention repositories() {
         return new RepositoriesConvention();
     }
@@ -61,10 +52,6 @@ public class Conventions {
 
     public static EdcConvention jar() {
         return new JarConvention();
-    }
-
-    public static EdcConvention nexusPublishing() {
-        return new NexusPublishingConvention();
     }
 
     public static EdcConvention rootBuildScript() {
