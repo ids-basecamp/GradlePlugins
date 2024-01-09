@@ -15,8 +15,6 @@ val jupiterVersion: String by project
 val assertj: String by project
 val mockitoVersion: String by project
 
-val gitHubPkgsName: String by project
-val gitHubPkgsUrl: String by project
 val gitHubUser: String? by project
 val gitHubToken: String? by project
 
@@ -39,8 +37,8 @@ allprojects {
     publishing {
         repositories {
             maven {
-                name = gitHubPkgsName
-                setUrl(gitHubPkgsUrl)
+                name = "GitHub"
+                setUrl("https://maven.pkg.github.com/ids-basecamp/gradle-plugins-fork")
                 credentials {
                     username = gitHubUser
                     password = gitHubToken
@@ -103,16 +101,13 @@ allprojects {
 
     afterEvaluate {
         // values needed for publishing
-        val pluginsWebsiteUrl: String by project
-        val pluginsScmConnection: String by project
-        val pluginsScmUrl: String by project
         publishing {
             publications.forEach { i ->
                 val mp = (i as MavenPublication)
                 mp.pom {
                     name.set(project.name)
                     description.set("edc :: ${project.name}")
-                    url.set(pluginsWebsiteUrl)
+                    url.set("https://github.com/ids-basecamp/gradle-plugins-fork.git")
 
                     licenses {
                         license {
@@ -147,8 +142,8 @@ allprojects {
                             }
                         }
                         scm {
-                            connection.set(pluginsScmConnection)
-                            url.set(pluginsScmUrl)
+                            connection.set("git@github.com:ids-basecamp/gradle-plugins-fork.git")
+                            url.set("https://github.com/ids-basecamp/gradle-plugins-fork.git")
                         }
                     }
                 }
