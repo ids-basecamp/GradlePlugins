@@ -5,9 +5,7 @@ plugins {
     signing
     `java-library`
     `version-catalog`
-    // for publishing to nexus/ossrh/mavencentral
     id("org.gradle.crypto.checksum") version "1.4.0"
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     id("com.gradle.plugin-publish") version "1.1.0" apply false
 }
 
@@ -17,6 +15,10 @@ val jupiterVersion: String by project
 val assertj: String by project
 val mockitoVersion: String by project
 
+val gitHubPkgsName: String by project
+val gitHubPkgsUrl: String by project
+val gitHubUser: String? by project
+val gitHubToken: String? by project
 
 var actualVersion: String = (project.findProperty("version") ?: defaultVersion) as String
 if (actualVersion == "unspecified") {
@@ -33,36 +35,22 @@ allprojects {
     pluginManager.withPlugin("java-gradle-plugin") {
         apply(plugin = "com.gradle.plugin-publish")
     }
-    if (!project.hasProperty("skip.signing")) {
-        apply(plugin = "signing")
 
-        //set the deploy-url only for java libraries
-        val deployUrl =
-            if (actualVersion.contains("SNAPSHOT")) "https://oss.sonatype.org/content/repositories/snapshots/"
-            else "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-        publishing {
-            repositories {
-                maven {
-                    name = "OSSRH"
-                    setUrl(deployUrl)
-                    credentials {
-                        username = System.getenv("OSSRH_USER") ?: return@credentials
-                        password = System.getenv("OSSRH_PASSWORD") ?: return@credentials
-                    }
+    publishing {
+        repositories {
+            maven {
+                name = gitHubPkgsName
+                setUrl(gitHubPkgsUrl)
+                credentials {
+                    username = gitHubUser
+                    password = gitHubToken
                 }
             }
-
-            signing {
-                useGpgCmd()
-                sign(publishing.publications)
-            }
         }
-
     }
+
     // for all java libs:
     pluginManager.withPlugin("java-library") {
-
-
         java {
             val javaVersion = 11
             toolchain {
@@ -172,17 +160,6 @@ allprojects {
         metaInf {
             from("${rootProject.projectDir.path}/NOTICE.md")
             from("${rootProject.projectDir.path}/LICENSE")
-        }
-    }
-}
-
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://oss.sonatype.org/content/repositories/snapshots/"))
-            username.set(System.getenv("OSSRH_USER") ?: return@sonatype)
-            password.set(System.getenv("OSSRH_PASSWORD") ?: return@sonatype)
         }
     }
 }
