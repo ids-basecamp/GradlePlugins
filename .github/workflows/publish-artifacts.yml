@@ -32,5 +32,5 @@ jobs:
         run: |
             ./gradlew publish \
             -PartifactVersion=${VERSION} \
-            -Dorg.gradle.project.gitHubUser=${{ github.actor }} \
-            -Dorg.gradle.project.gitHubToken=${{ secrets.GITHUB_TOKEN }}
+            -Dorg.gradle.project.publishUserName=${{ github.actor }} \
+            -Dorg.gradle.project.publishUserPassword=${{ secrets.GITHUB_TOKEN }}

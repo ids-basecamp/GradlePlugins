@@ -15,8 +15,8 @@ val jupiterVersion: String by project
 val assertj: String by project
 val mockitoVersion: String by project
 
-val gitHubUser: String? by project
-val gitHubToken: String? by project
+val publishUserName: String? by project
+val publishUserPassword: String? by project
 
 var actualVersion: String = (project.findProperty("version") ?: defaultVersion) as String
 if (actualVersion == "unspecified") {
@@ -40,8 +40,8 @@ allprojects {
                 name = "GitHub"
                 setUrl("https://maven.pkg.github.com/ids-basecamp/gradle-plugins-fork")
                 credentials {
-                    username = gitHubUser
-                    password = gitHubToken
+                    username = publishUserName
+                    password = publishUserPassword
                 }
             }
         }
