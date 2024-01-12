@@ -19,17 +19,7 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
 import static java.util.List.of;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.checkstyle;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.defaultDependencies;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.dependencyAnalysis;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.jacoco;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.jar;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.java;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.mavenPom;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.repositories;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.rootBuildScript;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.swagger;
-import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.tests;
+import static org.eclipse.edc.plugins.edcbuild.conventions.Conventions.*;
 
 /**
  * Adds (opinionated) conventions (=configuration) for various plugins.
@@ -57,6 +47,7 @@ public class EdcBuildPlugin implements Plugin<Project> {
                     repositories(),
                     defaultDependencies(),
                     checkstyle(),
+                    mavenPublishing(),
                     mavenPom(),
                     jacoco(),
                     dependencyAnalysis(),

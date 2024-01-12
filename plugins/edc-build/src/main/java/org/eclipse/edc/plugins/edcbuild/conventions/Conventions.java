@@ -22,6 +22,10 @@ public class Conventions {
         return new CheckstyleConvention();
     }
 
+    public static EdcConvention mavenPublishing() {
+        return new MavenPublishingConvention();
+    }
+
     public static EdcConvention repositories() {
         return new RepositoriesConvention();
     }
