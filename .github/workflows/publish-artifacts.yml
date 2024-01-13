@@ -20,13 +20,14 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Build project
-        run: ./gradlew clean build
-
       - name: Set version variable
         run: |
           TAG=${{ github.ref_name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+
+      - name: Build project
+        run: ./gradlew clean build \
+          -PdefaultVersion=${VERSION}
 
       - name: Publish to maven registry
         run: |
