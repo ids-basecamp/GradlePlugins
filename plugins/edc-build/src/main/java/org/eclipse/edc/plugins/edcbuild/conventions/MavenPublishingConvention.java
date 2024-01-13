@@ -29,10 +29,11 @@ class MavenPublishingConvention implements EdcConvention {
     public void apply(Project target) {
         var pubExt = requireExtension(target, PublishingExtension.class);
 
-        var repoName = System.getProperty("publishRepoName");
-        var repoUrl = System.getProperty("publishRepoUrl");
-        var userName = System.getProperty("publishUserName");
-        var userPassword = System.getProperty("publishUserPassword");
+        var properties = target.getProperties();
+        var repoName = properties.containsKey("publishRepoName") ? properties.get("publishRepoName").toString() : "";
+        var repoUrl = properties.containsKey("publishRepoUrl") ? properties.get("publishRepoUrl").toString() : "";
+        var userName = properties.containsKey("publishUserName") ? properties.get("publishUserName").toString() : "";
+        var userPassword = properties.containsKey("publishUserPassword") ? properties.get("publishUserPassword").toString() : "";
 
         RepositoryHandler repositories = pubExt.getRepositories();
         repositories.add(repositories.maven(repo -> {
