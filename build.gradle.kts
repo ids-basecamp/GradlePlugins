@@ -15,6 +15,8 @@ val jupiterVersion: String by project
 val assertj: String by project
 val mockitoVersion: String by project
 
+val publishRepoName: String by project
+val publishRepoUrl: String by project
 val publishUserName: String? by project
 val publishUserPassword: String? by project
 
@@ -37,8 +39,8 @@ allprojects {
     publishing {
         repositories {
             maven {
-                name = "GitHub"
-                setUrl("https://maven.pkg.github.com/ids-basecamp/gradle-plugins-fork")
+                name = publishRepoName
+                setUrl(publishRepoUrl)
                 credentials {
                     username = publishUserName
                     password = publishUserPassword
